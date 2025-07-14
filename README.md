@@ -6,8 +6,8 @@
 
 <div align="center">
     <h3 align="center">Cognito Token Verifier for PHP</h3>
-    <a href="https://app.codecov.io/github/Internacionalweb/cognito-token-verifier" > 
-        <img src="https://codecov.io/github/Internacionalweb/cognito-token-verifier/branch/master/graph/badge.svg?token=LBZ4VRX3HT"/> 
+    <a href="https://app.codecov.io/github/Barymont/cognito-token-verifier" > 
+        <img src="https://codecov.io/github/Barymont/cognito-token-verifier/branch/master/graph/badge.svg?token=LBZ4VRX3HT"/> 
     </a>
 </div>
 
@@ -26,7 +26,7 @@ This library verifies that the signature of the JWT is valid, comes from a desir
 1. Install the library in your project using composer
 
    ```
-     composer require internacionalweb/cognito-token-verifier
+     composer require barymont/cognito-token-verifier
    ```
 
 2. Configure your project to use the library, check the [Usage examples](#usage-examples) section for more information.
