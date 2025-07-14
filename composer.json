@@ -1,5 +1,5 @@
 {
-    "name": "internacionalweb/cognito-token-verifier",
+    "name": "barymont/cognito-token-verifier",
     "type": "library",
     "description": "This library verifies that the signature of the JWT is valid, comes from a desired application, and that the token has not been tampered with or expired.",
     "keywords": [
@@ -11,7 +11,7 @@
         "amazon",
         "authentication"
     ],
-    "homepage": "https://github.com/Internacionalweb/cognito-token-verifier",
+    "homepage": "https://github.com/Barymont/cognito-token-verifier",
     "license": "GPL-3.0-or-later",
     "authors": [
         {
