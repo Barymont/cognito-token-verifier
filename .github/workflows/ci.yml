@@ -3,29 +3,43 @@ name: CI
 on: [push]
 
 jobs:
- build-test:
-   runs-on: ubuntu-latest
+  build-test:
+    runs-on: ubuntu-latest
 
-   steps:
-     - name: Checkout Code
-       uses: actions/checkout@v2
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-     - name: Install composer and dependencies
-       uses: php-actions/composer@v6
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: xdebug
+          coverage: xdebug
+          tools: composer:v2
 
-     - name: PHPUnit Tests
-       uses: php-actions/phpunit@v3
-       env:
-         XDEBUG_MODE: coverage
-       with:
-         bootstrap: vendor/autoload.php
-         configuration: phpunit.xml
-         php_extensions: xdebug
-         args: tests --coverage-clover ./coverage.xml
+      - name: Show PHP version
+        run: php -v
 
-     - name: Upload to Codecov
-       uses: codecov/codecov-action@v3
-       with:
-         token: ${{ secrets.CODE_COV_TOKEN }}
-         files: ./coverage.xml
-         verbose: true
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Run PHPUnit tests
+        run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-clover coverage.xml
+        env:
+          XDEBUG_MODE: coverage
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODE_COV_TOKEN }}
+          files: ./coverage.xml
+          verbose: true
